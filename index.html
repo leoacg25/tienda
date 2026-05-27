@@ -22,6 +22,128 @@
         /* Modal transitions */
         .modal { transition: opacity 0.3s ease; }
         .modal-content { transition: transform 0.3s ease; }
+
+        /* Mobile: 3×3 grid, compact cart, search smaller */
+        @media (max-width: 1023px) {
+            #pos-product-grid {
+                gap: 0.3rem !important;
+            }
+            #pos-product-grid > div {
+                padding: 0.2rem !important;
+                height: 3.5rem !important;
+                border-radius: 0.4rem !important;
+            }
+            #pos-product-grid > div h4 {
+                font-size: 0.6rem !important;
+                line-height: 1.1 !important;
+            }
+            #pos-product-grid > div p {
+                font-size: 0.4rem !important;
+                margin-top: 0 !important;
+            }
+            #pos-product-grid > div .font-bold {
+                font-size: 0.7rem !important;
+            }
+            #pos-product-grid > div .text-xs {
+                font-size: 0.4rem !important;
+            }
+            #pos-product-grid > div .absolute {
+                font-size: 0.35rem !important;
+                padding: 0.02rem 0.2rem !important;
+            }
+            #pos-product-grid > div .mt-2 {
+                margin-top: 0 !important;
+            }
+            #pos-product-grid > div .mt-1 {
+                margin-top: 0 !important;
+            }
+            #pos-product-grid > div i {
+                font-size: 0.55rem !important;
+            }
+            /* Products area: smaller, scrollable */
+            #tab-sales .lg\:col-span-2 {
+                max-height: 25vh !important;
+            }
+            /* Grid container: scroll for more products */
+            #tab-sales .lg\:col-span-2 .overflow-y-auto {
+                overflow-y: auto !important;
+                height: auto !important;
+            }
+            /* Grid container compact */
+            #tab-sales .lg\:col-span-2 .p-4:not(.border-b) {
+                padding: 0.2rem 0.3rem !important;
+            }
+            /* Search section compact */
+            #tab-sales .lg\:col-span-2 .border-b.p-4 {
+                padding: 0.25rem 0.5rem !important;
+            }
+            /* Cart takes remaining space */
+            #tab-sales .lg\:col-span-1 {
+                flex: 1 1 auto !important;
+            }
+            /* Compact cart items */
+            #cart-items > div:not(#cart-empty-message) > div {
+                padding: 0.25rem 0.35rem !important;
+                gap: 0.25rem !important;
+                margin-bottom: 0.1rem !important;
+            }
+            #cart-items > div:not(#cart-empty-message) > div .font-medium {
+                font-size: 0.55rem !important;
+            }
+            #cart-items > div:not(#cart-empty-message) > div .text-\[10px\] {
+                font-size: 0.4rem !important;
+            }
+            #cart-items > div:not(#cart-empty-message) > div .w-7 {
+                width: 1.2rem !important;
+                height: 1.2rem !important;
+            }
+            #cart-items > div:not(#cart-empty-message) > div .w-7 i {
+                font-size: 0.35rem !important;
+            }
+            #cart-items > div:not(#cart-empty-message) > div .w-14 {
+                width: 2.2rem !important;
+                font-size: 0.45rem !important;
+            }
+            /* Compact checkout section */
+            #tab-sales .lg\:col-span-1 > div:last-child {
+                padding: 0.3rem 0.4rem !important;
+            }
+            #tab-sales .lg\:col-span-1 > div:last-child .text-lg {
+                font-size: 0.75rem !important;
+            }
+            #tab-sales .lg\:col-span-1 > div:last-child .text-2xl {
+                font-size: 0.9rem !important;
+            }
+            #tab-sales .lg\:col-span-1 > div:last-child .text-sm {
+                font-size: 0.5rem !important;
+            }
+            #tab-sales .lg\:col-span-1 > div:last-child .mb-2 {
+                margin-bottom: 0.1rem !important;
+            }
+            #tab-sales .lg\:col-span-1 > div:last-child .mb-4 {
+                margin-bottom: 0.15rem !important;
+            }
+            #tab-sales .lg\:col-span-1 > div:last-child .mb-1 {
+                margin-bottom: 0.05rem !important;
+            }
+            #tab-sales .lg\:col-span-1 > div:last-child .py-3 {
+                padding-top: 0.3rem !important;
+                padding-bottom: 0.3rem !important;
+            }
+            #tab-sales .lg\:col-span-1 > div:last-child .text-lg.font-bold {
+                font-size: 0.6rem !important;
+            }
+            /* Compact exchange rate bar */
+            #tab-sales .lg\:col-span-1 .px-4.py-2 {
+                padding: 0.15rem 0.4rem !important;
+            }
+            /* Search bar smaller */
+            #search-pos {
+                font-size: 0.8rem !important;
+                padding-top: 0.3rem !important;
+                padding-bottom: 0.3rem !important;
+            }
+        }
     </style>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
@@ -53,8 +175,17 @@
                 <span class="font-medium">Reportes</span>
             </button>
         </nav>
-        <div class="p-4 border-t border-slate-700 text-xs text-slate-400 text-center">
-            Datos guardados localmente
+        <div class="p-4 border-t border-slate-700">
+            <div class="flex items-center justify-between mb-1">
+                <span class="text-xs text-slate-400">Sincronización</span>
+                <button onclick="openModal('modal-settings')" class="text-slate-500 hover:text-white transition-colors p-1 rounded" title="Configuración GitHub">
+                    <i class="fa-solid fa-gear text-xs"></i>
+                </button>
+            </div>
+            <button onclick="syncNow()" id="btn-sync" class="w-full text-xs px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors flex items-center justify-center gap-1.5 mb-1">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Sincronizar
+            </button>
+            <div id="sync-status" class="text-xs text-slate-500 text-center truncate">Local</div>
         </div>
     </aside>
 
@@ -65,16 +196,29 @@
                 <i class="fa-solid fa-box-open text-[#9D79AF]"></i>
                 <span class="font-bold">Bajushop.ve</span>
             </div>
-            <button onclick="toggleMobileMenu()" class="p-2 focus:outline-none">
-                <i class="fa-solid fa-bars text-xl"></i>
-            </button>
+            <div class="flex items-center gap-1">
+                <span id="sync-status-mobile" class="text-xs text-slate-500 mr-1 truncate max-w-[80px]"></span>
+                <button onclick="syncNow()" class="p-2 text-slate-300 hover:text-white rounded-lg hover:bg-slate-800 transition-colors" title="Sincronizar">
+                    <i class="fa-solid fa-cloud-arrow-up text-sm"></i>
+                </button>
+                <button onclick="openModal('modal-settings')" class="p-2 text-slate-300 hover:text-white rounded-lg hover:bg-slate-800 transition-colors" title="Configurar GitHub">
+                    <i class="fa-solid fa-gear text-sm"></i>
+                </button>
+                <button onclick="toggleMobileMenu()" class="p-2 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
         </div>
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden bg-slate-800 border-t border-slate-700 pb-2 shadow-xl absolute w-full">
             <button onclick="switchTab('dashboard'); toggleMobileMenu()" class="w-full text-left px-6 py-3 border-b border-slate-700 hover:bg-slate-700"><i class="fa-solid fa-chart-pie w-6"></i> Dashboard</button>
             <button onclick="switchTab('inventory'); toggleMobileMenu()" class="w-full text-left px-6 py-3 border-b border-slate-700 hover:bg-slate-700"><i class="fa-solid fa-boxes-stacked w-6"></i> Inventario</button>
             <button onclick="switchTab('sales'); toggleMobileMenu()" class="w-full text-left px-6 py-3 border-b border-slate-700 hover:bg-slate-700"><i class="fa-solid fa-cart-shopping w-6"></i> Ventas</button>
-            <button onclick="switchTab('reports'); toggleMobileMenu()" class="w-full text-left px-6 py-3 hover:bg-slate-700"><i class="fa-solid fa-file-invoice w-6"></i> Reportes</button>
+            <button onclick="switchTab('reports'); toggleMobileMenu()" class="w-full text-left px-6 py-3 border-b border-slate-700 hover:bg-slate-700"><i class="fa-solid fa-file-invoice w-6"></i> Reportes</button>
+            <div class="border-t border-slate-700 mt-1 pt-1">
+                <button onclick="syncNow(); toggleMobileMenu()" class="w-full text-left px-6 py-3 hover:bg-slate-700 text-slate-300"><i class="fa-solid fa-cloud-arrow-up w-6"></i> Sincronizar</button>
+                <button onclick="openModal('modal-settings'); toggleMobileMenu()" class="w-full text-left px-6 py-3 hover:bg-slate-700 text-slate-300"><i class="fa-solid fa-gear w-6"></i> Configurar GitHub</button>
+            </div>
         </div>
     </div>
 
@@ -270,7 +414,7 @@
                     <p class="text-slate-500 mt-1">Registra nuevas ventas y emite recibos.</p>
                 </div>
 
-                  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1 min-h-0 max-h-full">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1 min-h-0 max-h-full">
                     <!-- Product Selection (Left, 2 columns wide on large screens) -->
                     <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-100 flex flex-col h-full max-h-full min-h-0">
                         <div class="p-4 border-b border-slate-100 bg-slate-50/50 rounded-t-xl shrink-0">
@@ -280,7 +424,7 @@
                             </div>
                         </div>
                         <div class="flex-1 overflow-y-auto p-4 bg-slate-50/30 min-h-0">
-                            <div id="pos-product-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                            <div id="pos-product-grid" class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 gap-4">
                                 <!-- Productos para POS generados por JS -->
                             </div>
                             <div id="pos-empty-state" class="hidden flex flex-col items-center justify-center p-12 text-slate-400 h-full">
@@ -297,6 +441,18 @@
                                 <i class="fa-solid fa-cart-shopping text-[#B191C1]"></i> Carrito
                             </h3>
                             <button onclick="clearCart()" class="text-sm text-red-500 hover:text-red-700 transition-colors">Vaciar</button>
+                        </div>
+
+                        <!-- Exchange Rate Bar -->
+                        <div class="px-4 py-2 bg-slate-50 border-b border-slate-100 shrink-0 flex items-center gap-2">
+                            <div class="flex items-center gap-1.5 flex-1 min-w-0">
+                                <span class="text-xs text-slate-500 font-medium shrink-0">Tasa Bs/$:</span>
+                                <input type="number" id="exchange-rate" step="0.0001" min="0" readonly class="w-28 px-1.5 py-1 text-xs border border-slate-200 rounded bg-slate-100 text-slate-700 text-right font-mono focus:outline-none" oninput="updateVESTotal()">
+                            </div>
+                            <button onclick="fetchBCVRate()" id="btn-bcv" class="text-xs px-2 py-1 rounded bg-[#B191C1] hover:bg-[#9D79AF] text-white shrink-0 transition-colors flex items-center gap-1">
+                                <i class="fa-solid fa-cloud-arrow-down"></i> BCV
+                            </button>
+                            <span id="bcv-status" class="text-[10px] text-slate-400 hidden"></span>
                         </div>
                         
                         <!-- Cart Items -->
@@ -319,9 +475,13 @@
                                 <span>Impuesto (0%):</span>
                                 <span id="cart-tax" class="font-medium">$0.00</span>
                             </div>
-                            <div class="flex justify-between items-center mb-6 pt-3 border-t border-slate-200">
-                                <span class="text-lg font-bold text-slate-800">Total:</span>
+                            <div class="flex justify-between items-center mb-1 pt-3 border-t border-slate-200">
+                                <span class="text-lg font-bold text-slate-800">Total USD:</span>
                                 <span id="cart-total" class="text-2xl font-bold text-[#B191C1]">$0.00</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-4 text-emerald-700">
+                                <span class="text-sm font-semibold">Total Bs:</span>
+                                <span id="cart-total-ves" class="text-lg font-bold">Bs. 0,00</span>
                             </div>
                             <button onclick="processSale()" id="btn-process-sale" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-bold text-lg transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2" disabled>
                                 <i class="fa-solid fa-check"></i> Cobrar
@@ -335,50 +495,106 @@
             <div id="tab-reports" class="tab-content max-w-6xl mx-auto h-full flex flex-col">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 shrink-0">
                     <div>
-                        <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Historial de Ventas</h2>
-                        <p class="text-slate-500 mt-1">Revisa el registro de todas las transacciones.</p>
+                        <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Reportes</h2>
+                        <div class="flex gap-2 mt-2">
+                            <button id="rpt-toggle-sales" onclick="setReportType('sales')" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-[#B191C1] text-white shadow-sm">Historial de Ventas</button>
+                            <button id="rpt-toggle-inv" onclick="setReportType('inventory')" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors bg-slate-100 text-slate-600 hover:bg-slate-200">Reporte de Inventario</button>
+                        </div>
                     </div>
-                    <button onclick="exportData()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2">
+                    <button id="rpt-export-btn" onclick="exportData()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2">
                         <i class="fa-solid fa-download"></i> Exportar CSV
                     </button>
                 </div>
 
                 <div class="bg-white rounded-xl shadow-sm border border-slate-100 flex flex-col flex-1 min-h-[400px]">
-                    <div class="p-4 border-b border-slate-100 bg-slate-50/50 rounded-t-xl shrink-0">
-                        <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
-                            <div class="flex gap-2 w-full sm:w-auto">
-                                <select id="filter-date" class="border border-slate-300 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#B191C1]">
-                                    <option value="all">Todas las fechas</option>
-                                    <option value="today">Hoy</option>
-                                    <option value="week">Últimos 7 días</option>
-                                    <option value="month">Este mes</option>
-                                </select>
+                    <!-- Sales Report Section -->
+                    <div id="rpt-sales-section">
+                        <div class="p-4 border-b border-slate-100 bg-slate-50/50 rounded-t-xl shrink-0">
+                            <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                                <div class="flex gap-2 w-full sm:w-auto">
+                                    <select id="filter-date" class="border border-slate-300 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#B191C1]">
+                                        <option value="all">Todas las fechas</option>
+                                        <option value="today">Hoy</option>
+                                        <option value="week">Últimos 7 días</option>
+                                        <option value="month">Este mes</option>
+                                    </select>
+                                </div>
+                                <div class="text-sm font-medium px-4 py-2 bg-green-50 text-green-700 rounded-lg border border-green-100">
+                                    Total Filtrado: <span id="reports-total-filtered" class="font-bold text-lg">$0.00</span>
+                                </div>
                             </div>
-                            <div class="text-sm font-medium px-4 py-2 bg-green-50 text-green-700 rounded-lg border border-green-100">
-                                Total Filtrado: <span id="reports-total-filtered" class="font-bold text-lg">$0.00</span>
+                        </div>
+                        <div class="flex-1 overflow-auto table-container">
+                            <table class="w-full text-left border-collapse min-w-[800px]">
+                                <thead class="bg-slate-50 sticky top-0 z-10 shadow-sm">
+                                    <tr>
+                                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">ID Venta</th>
+                                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">Fecha y Hora</th>
+                                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">Artículos</th>
+                                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">Método</th>
+                                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200 text-right">Total</th>
+                                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200 text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reports-table-body" class="divide-y divide-slate-100">
+                                    <!-- Filas de reportes generadas por JS -->
+                                </tbody>
+                            </table>
+                            <div id="reports-empty-state" class="hidden flex flex-col items-center justify-center p-12 text-slate-400 h-64">
+                                <i class="fa-solid fa-receipt text-4xl mb-3 text-slate-300"></i>
+                                <p class="text-lg font-medium text-slate-600">No hay ventas registradas</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="flex-1 overflow-auto table-container">
-                        <table class="w-full text-left border-collapse min-w-[800px]">
-                            <thead class="bg-slate-50 sticky top-0 z-10 shadow-sm">
-                                <tr>
-                                    <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">ID Venta</th>
-                                    <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">Fecha y Hora</th>
-                                    <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">Artículos</th>
-                                    <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">Método</th>
-                                    <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200 text-right">Total</th>
-                                    <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200 text-center">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="reports-table-body" class="divide-y divide-slate-100">
-                                <!-- Filas de reportes generadas por JS -->
-                            </tbody>
-                        </table>
-                        <div id="reports-empty-state" class="hidden flex flex-col items-center justify-center p-12 text-slate-400 h-64">
-                            <i class="fa-solid fa-receipt text-4xl mb-3 text-slate-300"></i>
-                            <p class="text-lg font-medium text-slate-600">No hay ventas registradas</p>
+                    <!-- Inventory Report Section -->
+                    <div id="rpt-inv-section" class="hidden flex flex-col flex-1 min-h-0">
+                        <div class="p-4 border-b border-slate-100 bg-slate-50/50 rounded-t-xl shrink-0">
+                            <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                                <div class="flex gap-2 w-full sm:w-auto">
+                                    <select id="rpt-inv-filter-cat" class="border border-slate-300 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#B191C1] text-sm" onchange="renderInventoryReport()">
+                                        <option value="">Todas las categorías</option>
+                                    </select>
+                                </div>
+                                <div class="flex gap-4 text-sm">
+                                    <span class="font-medium text-slate-600">Productos: <span id="rpt-inv-count" class="text-slate-800">0</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-1 overflow-auto table-container">
+                            <table class="w-full text-left border-collapse min-w-[600px]">
+                                <thead class="bg-slate-50 sticky top-0 z-10 shadow-sm">
+                                    <tr>
+                                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">Código</th>
+                                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">Nombre</th>
+                                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200 text-right">Costo</th>
+                                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200 text-right">% Utilidad</th>
+                                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200 text-right">Precio Venta</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rpt-inv-table-body" class="divide-y divide-slate-100">
+                                </tbody>
+                            </table>
+                            <div id="rpt-inv-empty-state" class="hidden flex flex-col items-center justify-center p-12 text-slate-400 h-64">
+                                <i class="fa-solid fa-box-open text-4xl mb-3 text-slate-300"></i>
+                                <p class="text-lg font-medium text-slate-600">No hay productos</p>
+                            </div>
+                        </div>
+                        <div id="rpt-inv-footer" class="hidden border-t-2 border-slate-200 bg-slate-50 px-4 py-3 shrink-0 rounded-b-xl">
+                            <div class="flex justify-between md:justify-end items-center gap-6 md:gap-10 md:pr-16">
+                                <div class="text-right">
+                                    <span class="text-xs text-slate-500 block">Costo Total</span>
+                                    <span class="text-base font-bold text-slate-800" id="rpt-inv-total-cost">$0.00</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs text-slate-500 block">Venta Total</span>
+                                    <span class="text-base font-bold text-[#B191C1]" id="rpt-inv-total-price">$0.00</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs text-slate-500 block">Ganancia Potencial</span>
+                                    <span class="text-base font-bold text-green-600" id="rpt-inv-total-profit">$0.00</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -398,17 +614,37 @@
                     <i class="fa-solid fa-xmark text-xl"></i>
                 </button>
             </div>
-            <div class="p-6 flex flex-col gap-5">
-                <div class="text-center mb-2">
+            <div class="p-6 flex flex-col gap-4">
+                <div class="text-center mb-1">
                     <p class="text-slate-500 text-sm mb-1">Total a cobrar</p>
                     <p class="text-4xl font-bold text-[#B191C1]" id="checkout-total-display">$0.00</p>
+                    <p class="text-xl font-bold text-emerald-600 mt-1" id="checkout-total-ves-display">Bs. 0,00</p>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">Método de Pago</label>
-                    <select id="checkout-payment-method" class="w-full border border-slate-300 rounded-lg px-3 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-[#B191C1] text-lg shadow-sm">
+                <div class="border-t border-slate-100 pt-3">
+                    <label class="block text-sm font-semibold text-slate-700 mb-3">Método de Pago</label>
+                    <select id="checkout-payment-method" class="w-full border border-slate-300 rounded-lg px-3 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-[#B191C1] text-lg shadow-sm" onchange="togglePaymentMethod()">
                         <option value="Efectivo">💵 Efectivo</option>
                         <option value="Transferencia">🏦 Transferencia</option>
+                        <option value="mixto">🔀 Pago Mixto</option>
                     </select>
+
+                    <div id="pay-mixed-section" class="hidden mt-4 space-y-3">
+                        <div class="flex items-end gap-2">
+                            <div class="flex-1">
+                                <label class="block text-xs font-medium text-slate-600 mb-1">💵 Efectivo ($)</label>
+                                <input type="number" id="pay-cash" min="0" step="0.01" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B191C1] text-right text-lg font-medium" oninput="syncPayment('cash')">
+                            </div>
+                            <button onclick="completePayment('cash')" class="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition-colors border border-slate-300 shrink-0">Completar</button>
+                        </div>
+                        <div class="flex items-end gap-2">
+                            <div class="flex-1">
+                                <label class="block text-xs font-medium text-slate-600 mb-1">🏦 Transferencia ($)</label>
+                                <input type="number" id="pay-transfer" min="0" step="0.01" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B191C1] text-right text-lg font-medium" oninput="syncPayment('transfer')">
+                            </div>
+                            <button onclick="completePayment('transfer')" class="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition-colors border border-slate-300 shrink-0">Completar</button>
+                        </div>
+                        <div id="pay-validation" class="text-xs text-center font-medium hidden"></div>
+                    </div>
                 </div>
             </div>
             <div class="p-4 border-t border-slate-100 bg-slate-50 flex gap-3">
@@ -455,8 +691,18 @@
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Precio de Costo ($)</label>
+                        <input type="number" id="prod-cost" min="0" step="0.01" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B191C1] focus:border-transparent transition-shadow text-right" oninput="calcSellPrice()">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">% Utilidad</label>
+                        <input type="number" id="prod-profit-pct" min="0" step="0.1" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B191C1] focus:border-transparent transition-shadow text-right" oninput="calcSellPrice()">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
                         <label class="block text-sm font-medium text-slate-700 mb-1">Precio Venta ($) <span class="text-red-500">*</span></label>
-                        <input type="number" id="prod-price" required min="0" step="0.01" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B191C1] focus:border-transparent transition-shadow text-right">
+                        <input type="number" id="prod-price" required min="0" step="0.01" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B191C1] focus:border-transparent transition-shadow text-right" oninput="calcProfitPct()">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-700 mb-1">Stock Actual <span class="text-red-500">*</span></label>
@@ -468,6 +714,24 @@
                     <label class="block text-sm font-medium text-slate-700 mb-1">Alerta de Stock Mínimo</label>
                     <input type="number" id="prod-min-stock" min="0" step="1" value="5" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B191C1] focus:border-transparent transition-shadow text-right">
                     <p class="text-xs text-slate-500 mt-1">Se mostrará una alerta cuando el stock baje de este número.</p>
+                </div>
+
+                <div class="border-t border-slate-100 pt-4 mt-4">
+                    <div class="flex items-center gap-2 mb-3">
+                        <input type="checkbox" id="prod-offer-enabled" class="w-4 h-4 rounded border-slate-300 text-[#B191C1] focus:ring-[#B191C1]">
+                        <label for="prod-offer-enabled" class="text-sm font-semibold text-slate-700 cursor-pointer">Oferta por Volumen</label>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Cantidad</label>
+                            <input type="number" id="prod-offer-qty" min="2" step="1" value="3" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B191C1] text-right bg-slate-100" disabled>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Precio total ($)</label>
+                            <input type="number" id="prod-offer-price" min="0" step="0.01" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B191C1] text-right bg-slate-100" disabled>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-1">Ej: 3 unidades por $12 en lugar de $15</p>
                 </div>
 
                 <div class="pt-4 flex justify-end gap-3 border-t border-slate-100">
@@ -506,16 +770,56 @@
         </div>
     </div>
 
+    <!-- Settings Modal -->
+    <div id="modal-settings" class="modal fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden z-50 flex items-center justify-center opacity-0 pointer-events-none">
+        <div class="modal-content bg-white rounded-xl shadow-2xl w-full max-w-md mx-4 transform scale-95">
+            <div class="flex justify-between items-center p-5 border-b border-slate-100">
+                <h3 class="text-xl font-bold text-slate-800">Configuración GitHub</h3>
+                <button onclick="closeModal('modal-settings')" class="text-slate-400 hover:text-slate-600 focus:outline-none">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div class="p-5 space-y-4">
+                <p class="text-sm text-slate-500">Configura para sincronizar tu inventario con un archivo JSON en tu repositorio de GitHub.</p>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Usuario / Organización</label>
+                    <input type="text" id="gh-owner" placeholder="ej: tunombre" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B191C1]">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Repositorio</label>
+                    <input type="text" id="gh-repo" placeholder="ej: mirepositorio" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B191C1]">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Token Personal (PAT)</label>
+                    <input type="password" id="gh-token" placeholder="ghp_..." class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B191C1] font-mono text-xs">
+                    <p class="text-xs text-slate-500 mt-1">Crea un token en GitHub: Settings → Developer settings → Personal access tokens → Fine-grained tokens. Permiso: <strong>Contents</strong> (Read and write).</p>
+                </div>
+                <div id="gh-test-result" class="text-sm hidden"></div>
+            </div>
+            <div class="p-4 border-t border-slate-100 bg-slate-50 flex gap-3 rounded-b-xl">
+                <button onclick="closeModal('modal-settings')" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-800 py-2.5 rounded-lg font-medium transition-colors">
+                    Cancelar
+                </button>
+                <button onclick="testGitHubConfig()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 px-4 py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-flask"></i> Probar
+                </button>
+                <button onclick="saveGitHubConfig()" class="flex-1 bg-[#B191C1] hover:bg-[#9D79AF] text-white py-2.5 rounded-lg font-bold transition-colors">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // --- STATE MANAGEMENT ---
         // Generar datos iniciales de prueba si el localStorage está vacío
         const initialProducts = [
-            { id: generateId(), sku: 'TEC-001', name: 'Laptop Pro 15"', category: 'Electrónica', price: 1200.00, stock: 8, minStock: 3 },
-            { id: generateId(), sku: 'TEC-002', name: 'Ratón Inalámbrico', category: 'Accesorios', price: 25.50, stock: 45, minStock: 10 },
-            { id: generateId(), sku: 'TEC-003', name: 'Teclado Mecánico', category: 'Accesorios', price: 85.00, stock: 12, minStock: 5 },
-            { id: generateId(), sku: 'OFI-001', name: 'Silla Ergonómica', category: 'Mobiliario', price: 150.00, stock: 2, minStock: 5 }, // Low stock example
-            { id: generateId(), sku: 'OFI-002', name: 'Escritorio Elevable', category: 'Mobiliario', price: 320.00, stock: 5, minStock: 2 },
-            { id: generateId(), sku: 'SUM-001', name: 'Papel A4 (Caja)', category: 'Suministros', price: 35.00, stock: 0, minStock: 10 }, // Out of stock example
+            { id: generateId(), sku: 'TEC-001', name: 'Laptop Pro 15"', category: 'Electrónica', costPrice: 900.00, profitPercent: 33.3, price: 1200.00, stock: 8, minStock: 3 },
+            { id: generateId(), sku: 'TEC-002', name: 'Ratón Inalámbrico', category: 'Accesorios', costPrice: 15.00, profitPercent: 70.0, price: 25.50, stock: 45, minStock: 10 },
+            { id: generateId(), sku: 'TEC-003', name: 'Teclado Mecánico', category: 'Accesorios', costPrice: 50.00, profitPercent: 70.0, price: 85.00, stock: 12, minStock: 5 },
+            { id: generateId(), sku: 'OFI-001', name: 'Silla Ergonómica', category: 'Mobiliario', costPrice: 100.00, profitPercent: 50.0, price: 150.00, stock: 2, minStock: 5 },
+            { id: generateId(), sku: 'OFI-002', name: 'Escritorio Elevable', category: 'Mobiliario', costPrice: 210.00, profitPercent: 52.4, price: 320.00, stock: 5, minStock: 2 },
+            { id: generateId(), sku: 'SUM-001', name: 'Papel A4 (Caja)', category: 'Suministros', costPrice: 22.00, profitPercent: 59.1, price: 35.00, stock: 0, minStock: 10 },
         ];
 
         // Inicializar datos
@@ -525,6 +829,7 @@
         let chartPeriod = 'week'; // 'week' | 'month'
         let salesChartInstance = null;
         let currentSaleData = null; // Guardar la venta actual para poder compartirla
+        let reportType = 'sales'; // 'sales' | 'inventory'
 
         // Guardar datos iniciales si es la primera vez
         if (!localStorage.getItem('stockflow_products')) {
@@ -540,14 +845,96 @@
             return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
         }
 
+        function formatVES(amount) {
+            return amount.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function updateVESTotal() {
+            const rate = parseFloat(document.getElementById('exchange-rate').value) || 0;
+            localStorage.setItem('bajushop_exchange_rate', rate.toString());
+            const usdEl = document.getElementById('cart-total');
+            const vesEl = document.getElementById('cart-total-ves');
+            if (rate > 0 && usdEl.textContent !== '$0.00') {
+                const usd = parseFloat(usdEl.textContent.replace(/[^0-9.-]/g, '')) || 0;
+                vesEl.textContent = 'Bs. ' + formatVES(usd * rate);
+            } else {
+                vesEl.textContent = 'Bs. 0,00';
+            }
+        }
+
+        function setRateEditable(editable) {
+            const el = document.getElementById('exchange-rate');
+            el.readOnly = !editable;
+            el.classList.toggle('bg-slate-100', !editable);
+            el.classList.toggle('bg-white', editable);
+            el.classList.toggle('border-slate-200', !editable);
+            el.classList.toggle('border-[#B191C1]', editable);
+            if (editable) {
+                el.classList.add('focus:ring-2', 'focus:ring-[#B191C1]');
+            } else {
+                el.classList.remove('focus:ring-2', 'focus:ring-[#B191C1]');
+            }
+        }
+
+        async function fetchBCVRate() {
+            const btn = document.getElementById('btn-bcv');
+            const status = document.getElementById('bcv-status');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+            status.className = 'text-[10px] text-slate-400';
+            status.textContent = 'Consultando...';
+            status.classList.remove('hidden');
+
+            try {
+                const res = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
+                if (!res.ok) throw new Error('Error HTTP ' + res.status);
+                const data = await res.json();
+                const rate = data.promedio;
+                document.getElementById('exchange-rate').value = rate;
+                setRateEditable(false);
+                updateVESTotal();
+                status.className = 'text-[10px] text-green-600';
+                status.textContent = 'Tasa BCV actualizada';
+                setTimeout(() => status.classList.add('hidden'), 3000);
+            } catch (e) {
+                console.warn('Error fetching BCV rate:', e);
+                setRateEditable(true);
+                status.className = 'text-[10px] text-amber-600';
+                status.textContent = 'Sin internet — edita manualmente';
+                setTimeout(() => status.classList.add('hidden'), 5000);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-down"></i> BCV';
+            }
+        }
+
+        function calcSellPrice() {
+            const cost = parseFloat(document.getElementById('prod-cost').value) || 0;
+            const pct = parseFloat(document.getElementById('prod-profit-pct').value) || 0;
+            if (cost > 0 && pct > 0) {
+                document.getElementById('prod-price').value = (cost * (1 + pct / 100)).toFixed(2);
+            }
+        }
+
+        function calcProfitPct() {
+            const cost = parseFloat(document.getElementById('prod-cost').value) || 0;
+            const price = parseFloat(document.getElementById('prod-price').value) || 0;
+            if (cost > 0 && price > 0) {
+                document.getElementById('prod-profit-pct').value = ((price / cost - 1) * 100).toFixed(1);
+            }
+        }
+
         function formatDate(dateString) {
             const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit' };
             return new Date(dateString).toLocaleDateString('es-ES', options);
         }
 
+        let _skipSync = false;
+
         function saveData() {
             localStorage.setItem('stockflow_products', JSON.stringify(products));
             localStorage.setItem('stockflow_sales', JSON.stringify(sales));
+            if (!_skipSync) queueSync();
         }
 
         function showToast(message, type = 'success') {
@@ -588,6 +975,254 @@
             }, 3000);
         }
 
+        // --- GITHUB SYNC ---
+        const GITHUB_CONFIG_KEY = 'bajushop_sync_config';
+        const SYNC_STATUS_KEY = 'bajushop_sync_status';
+
+        function getGitHubConfig() {
+            try { return JSON.parse(localStorage.getItem(GITHUB_CONFIG_KEY)) || null; }
+            catch { return null; }
+        }
+
+        function setGitHubConfig(config) {
+            localStorage.setItem(GITHUB_CONFIG_KEY, JSON.stringify(config));
+        }
+
+        function encodeBase64(str) {
+            const bytes = new TextEncoder().encode(str);
+            return btoa(String.fromCharCode(...bytes));
+        }
+
+        function decodeBase64(str) {
+            const bytes = new Uint8Array([...atob(str)].map(c => c.charCodeAt(0)));
+            return new TextDecoder().decode(bytes);
+        }
+
+        function updateSyncStatus() {
+            const setEl = (id, text, className) => {
+                const el = document.getElementById(id);
+                if (el) { el.textContent = text; el.className = className; }
+            };
+            const config = getGitHubConfig();
+            if (!config || !config.token) {
+                setEl('sync-status', 'Sin configurar', 'text-xs text-slate-500 text-center truncate');
+                setEl('sync-status-mobile', '', 'text-xs text-slate-500 mr-1 truncate max-w-[80px]');
+                return;
+            }
+            const stored = localStorage.getItem(SYNC_STATUS_KEY);
+            if (!stored) {
+                setEl('sync-status', 'Sin sincronizar', 'text-xs text-amber-500 text-center truncate');
+                setEl('sync-status-mobile', '', 'text-xs text-slate-500 mr-1 truncate max-w-[80px]');
+                return;
+            }
+            const status = JSON.parse(stored);
+            if (status.success) {
+                const d = new Date(status.lastSync);
+                const label = d.toLocaleString('es-ES', { hour: '2-digit', minute: '2-digit' });
+                setEl('sync-status', 'Última sinc: ' + d.toLocaleString('es-ES'), 'text-xs text-green-400 text-center truncate');
+                setEl('sync-status-mobile', label, 'text-xs text-green-400 mr-1 truncate max-w-[80px]');
+            } else {
+                setEl('sync-status', 'Error en sincronización', 'text-xs text-red-400 text-center truncate');
+                setEl('sync-status-mobile', 'Error', 'text-xs text-red-400 mr-1 truncate max-w-[80px]');
+            }
+        }
+
+        async function loadFromGitHub() {
+            const config = getGitHubConfig();
+            if (!config || !config.owner || !config.repo || !config.token) return false;
+
+            try {
+                const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/inventario.json`;
+                const res = await fetch(url, {
+                    headers: {
+                        'Authorization': `Bearer ${config.token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                if (!res.ok) return false;
+
+                const data = await res.json();
+                const content = decodeBase64(data.content);
+                const json = JSON.parse(content);
+
+                if (json.products && Array.isArray(json.products)) {
+                    products = json.products;
+                }
+                if (json.sales && Array.isArray(json.sales)) {
+                    sales = json.sales;
+                }
+                _skipSync = true;
+                saveData();
+                _skipSync = false;
+                updateSyncStatus();
+                return true;
+            } catch (e) {
+                console.warn('Error loading from GitHub:', e);
+                return false;
+            }
+        }
+
+        let _syncTimeout = null;
+
+        function queueSync() {
+            if (_syncTimeout) clearTimeout(_syncTimeout);
+            _syncTimeout = setTimeout(() => syncToGitHub(), 3000);
+        }
+
+        async function syncToGitHub() {
+            const config = getGitHubConfig();
+            if (!config || !config.owner || !config.repo || !config.token) return false;
+
+            const btn = document.getElementById('btn-sync');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sincronizando...';
+            btn.disabled = true;
+
+            try {
+                const payload = { products, sales };
+                const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/inventario.json`;
+
+                // Get file metadata (need sha for update)
+                let sha = null;
+                const getRes = await fetch(url, {
+                    headers: {
+                        'Authorization': `Bearer ${config.token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                if (getRes.ok) {
+                    const existing = await getRes.json();
+                    sha = existing.sha;
+                }
+
+                // Create or update file
+                const body = {
+                    message: `Inventario sync ${new Date().toISOString().split('T')[0]}`,
+                    content: encodeBase64(JSON.stringify(payload, null, 2))
+                };
+                if (sha) body.sha = sha;
+
+                const putRes = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${config.token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (!putRes.ok) {
+                    const err = await putRes.text();
+                    throw new Error(err);
+                }
+
+                localStorage.setItem(SYNC_STATUS_KEY, JSON.stringify({ lastSync: new Date().toISOString(), success: true }));
+                updateSyncStatus();
+                showToast('Datos sincronizados con GitHub', 'success');
+                return true;
+            } catch (e) {
+                localStorage.setItem(SYNC_STATUS_KEY, JSON.stringify({ lastSync: new Date().toISOString(), success: false, error: e.message }));
+                updateSyncStatus();
+                showToast('Error al sincronizar: ' + e.message, 'error');
+                return false;
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async function syncNow() {
+            await syncToGitHub();
+        }
+
+        function loadSettingsForm() {
+            const config = getGitHubConfig();
+            if (config) {
+                document.getElementById('gh-owner').value = config.owner || '';
+                document.getElementById('gh-repo').value = config.repo || '';
+                document.getElementById('gh-token').value = config.token || '';
+            }
+        }
+
+        function saveGitHubConfig() {
+            const owner = document.getElementById('gh-owner').value.trim();
+            const repo = document.getElementById('gh-repo').value.trim();
+            const token = document.getElementById('gh-token').value.trim();
+
+            if (!owner || !repo || !token) {
+                showToast('Completa todos los campos', 'error');
+                return;
+            }
+
+            setGitHubConfig({ owner, repo, token });
+            updateSyncStatus();
+            closeModal('modal-settings');
+            showToast('Configuración guardada');
+            syncToGitHub();
+        }
+
+        async function testGitHubConfig() {
+            const owner = document.getElementById('gh-owner').value.trim();
+            const repo = document.getElementById('gh-repo').value.trim();
+            const token = document.getElementById('gh-token').value.trim();
+            const resultEl = document.getElementById('gh-test-result');
+
+            if (!owner || !repo || !token) {
+                resultEl.className = 'text-sm text-red-600';
+                resultEl.textContent = 'Completa todos los campos';
+                resultEl.classList.remove('hidden');
+                return;
+            }
+
+            resultEl.className = 'text-sm text-slate-600';
+            resultEl.textContent = 'Probando conexión...';
+            resultEl.classList.remove('hidden');
+
+            try {
+                const url = `https://api.github.com/repos/${owner}/${repo}/contents/inventario.json`;
+                const res = await fetch(url, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                if (res.ok) {
+                    resultEl.className = 'text-sm text-green-600';
+                    resultEl.textContent = 'Conexión exitosa. El archivo existe en el repositorio.';
+                } else if (res.status === 404) {
+                    resultEl.className = 'text-sm text-amber-600';
+                    resultEl.textContent = 'Repositorio accesible. El archivo inventario.json se creará al sincronizar.';
+                } else if (res.status === 401 || res.status === 403) {
+                    const err = await res.json();
+                    resultEl.className = 'text-sm text-red-600';
+                    resultEl.textContent = 'Error de autenticación: ' + (err.message || 'Token inválido o sin permisos');
+                } else {
+                    resultEl.className = 'text-sm text-red-600';
+                    resultEl.textContent = 'Error ' + res.status + ': ' + res.statusText;
+                }
+            } catch (e) {
+                resultEl.className = 'text-sm text-red-600';
+                resultEl.textContent = 'Error de conexión: ' + e.message;
+            }
+        }
+
+        // Override openModal to load settings on settings modal open
+        const _origOpenModal = openModal;
+        openModal = function(id) {
+            if (id === 'modal-settings') loadSettingsForm();
+            _origOpenModal(id);
+        };
+
+        // Hook closeModal too for settings
+        const _origCloseModal = closeModal;
+        closeModal = function(id) {
+            _origCloseModal(id);
+            if (id === 'modal-settings') {
+                document.getElementById('gh-test-result').classList.add('hidden');
+            }
+        };
+
         // --- NAVIGATION & UI ---
         function switchTab(tabId) {
             // Esconder todas las tabs
@@ -619,7 +1254,7 @@
                 renderPOSProducts();
                 renderCart();
             }
-            if (tabId === 'reports') renderReports();
+            if (tabId === 'reports') setReportType(reportType);
         }
 
         function toggleMobileMenu() {
@@ -637,7 +1272,17 @@
             modal.querySelector('.modal-content').classList.add('scale-100');
         }
 
-        function closeModal(id) {
+                document.getElementById('prod-offer-enabled').addEventListener('change', function() {
+                    const disabled = !this.checked;
+                    document.getElementById('prod-offer-qty').disabled = disabled;
+                    document.getElementById('prod-offer-price').disabled = disabled;
+                    document.getElementById('prod-offer-qty').classList.toggle('bg-slate-100', disabled);
+                    document.getElementById('prod-offer-qty').classList.toggle('bg-white', !disabled);
+                    document.getElementById('prod-offer-price').classList.toggle('bg-slate-100', disabled);
+                    document.getElementById('prod-offer-price').classList.toggle('bg-white', !disabled);
+                });
+
+                function closeModal(id) {
             const modal = document.getElementById(id);
             modal.classList.add('opacity-0', 'pointer-events-none');
             modal.querySelector('.modal-content').classList.remove('scale-100');
@@ -650,6 +1295,10 @@
                     document.getElementById('form-product').reset();
                     document.getElementById('prod-id').value = '';
                     document.getElementById('modal-product-title').textContent = 'Nuevo Producto';
+                    document.getElementById('prod-cost').value = '';
+                    document.getElementById('prod-profit-pct').value = '';
+                    document.getElementById('prod-offer-enabled').checked = false;
+                    document.getElementById('prod-offer-enabled').dispatchEvent(new Event('change'));
                 }
             }, 300); // Matches CSS transition time
         }
@@ -859,7 +1508,7 @@
                             <td class="py-3 px-4 border-b border-slate-100 font-mono text-xs text-slate-500">${p.sku}</td>
                             <td class="py-3 px-4 border-b border-slate-100 font-medium text-slate-800">${p.name}</td>
                             <td class="py-3 px-4 border-b border-slate-100 text-sm text-slate-600">${p.category || '-'}</td>
-                            <td class="py-3 px-4 border-b border-slate-100 text-right text-sm font-medium text-slate-700">${formatMoney(p.price)}</td>
+                            <td class="py-3 px-4 border-b border-slate-100 text-right text-sm font-medium text-slate-700">${formatMoney(p.price)} ${p.offerEnabled && p.offerQty > 1 && p.offerPrice > 0 ? `<span class="text-green-600 text-xs font-bold ml-1" title="${p.offerQty}x ${formatMoney(p.offerPrice)}">${p.offerQty}x${formatMoney(p.offerPrice)}</span>` : ''}</td>
                             <td class="py-3 px-4 border-b border-slate-100 text-right text-sm">${stock}</td>
                             <td class="py-3 px-4 border-b border-slate-100 text-center">${statusHtml}</td>
                             <td class="py-3 px-4 border-b border-slate-100 text-right">
@@ -900,13 +1549,19 @@
             e.preventDefault();
             
             const id = document.getElementById('prod-id').value;
+            const offerEnabled = document.getElementById('prod-offer-enabled').checked;
             const productData = {
                 sku: document.getElementById('prod-sku').value.toUpperCase(),
                 name: document.getElementById('prod-name').value,
                 category: document.getElementById('prod-category').value,
+                costPrice: parseFloat(document.getElementById('prod-cost').value) || 0,
+                profitPercent: parseFloat(document.getElementById('prod-profit-pct').value) || 0,
                 price: parseFloat(document.getElementById('prod-price').value),
                 stock: parseInt(document.getElementById('prod-stock').value),
-                minStock: parseInt(document.getElementById('prod-min-stock').value)
+                minStock: parseInt(document.getElementById('prod-min-stock').value),
+                offerEnabled: offerEnabled,
+                offerQty: offerEnabled ? parseInt(document.getElementById('prod-offer-qty').value) : 0,
+                offerPrice: offerEnabled ? parseFloat(document.getElementById('prod-offer-price').value) : 0
             };
 
             // Validar SKU único (excepto si es el mismo producto)
@@ -945,9 +1600,15 @@
             document.getElementById('prod-sku').value = product.sku;
             document.getElementById('prod-name').value = product.name;
             document.getElementById('prod-category').value = product.category || '';
+            document.getElementById('prod-cost').value = product.costPrice || 0;
+            document.getElementById('prod-profit-pct').value = product.profitPercent || 0;
             document.getElementById('prod-price').value = product.price;
             document.getElementById('prod-stock').value = product.stock;
             document.getElementById('prod-min-stock').value = product.minStock;
+            document.getElementById('prod-offer-enabled').checked = !!product.offerEnabled;
+            document.getElementById('prod-offer-qty').value = product.offerQty || 3;
+            document.getElementById('prod-offer-price').value = product.offerPrice || 0;
+            document.getElementById('prod-offer-enabled').dispatchEvent(new Event('change'));
 
             openModal('modal-add-product');
         }
@@ -995,10 +1656,13 @@
                     const stockLeft = p.stock - qtyInCart;
                     const isSoldOut = stockLeft <= 0;
 
+                    const hasOffer = p.offerEnabled && p.offerQty > 1 && p.offerPrice > 0;
+
                     html += `
                         <div onclick="${isSoldOut ? '' : `addToCart('${p.id}')`}" class="bg-white border ${isSoldOut ? 'border-red-200 opacity-60 cursor-not-allowed' : 'border-slate-200 hover:border-[#B191C1] cursor-pointer hover:shadow-md'} rounded-xl p-4 flex flex-col transition-all relative overflow-hidden h-32 select-none group">
                             
                             ${qtyInCart > 0 ? `<div class="absolute top-0 right-0 bg-[#B191C1] text-white text-xs font-bold px-2 py-1 rounded-bl-lg">${qtyInCart} en carrito</div>` : ''}
+                            ${hasOffer ? `<div class="absolute top-0 left-0 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-br-lg">${p.offerQty}x${formatMoney(p.offerPrice)}</div>` : ''}
                             
                             <div class="flex-1">
                                 <h4 class="font-semibold text-slate-800 text-sm leading-tight line-clamp-2 group-hover:text-[#B191C1] transition-colors">${p.name}</h4>
@@ -1092,6 +1756,24 @@
             renderPOSProducts(document.getElementById('search-pos').value);
         }
 
+        function calculateOfferTotal(product, qty) {
+            if (product.offerEnabled && product.offerQty > 0 && product.offerPrice > 0 && qty >= product.offerQty) {
+                const bundles = Math.floor(qty / product.offerQty);
+                const remainder = qty % product.offerQty;
+                return bundles * product.offerPrice + remainder * product.price;
+            }
+            return qty * product.price;
+        }
+
+        function formatPriceWithOffer(product, qty) {
+            const total = calculateOfferTotal(product, qty);
+            const normalTotal = qty * product.price;
+            if (total < normalTotal) {
+                return { total, savings: normalTotal - total, hasOffer: true, unitPrice: total / qty };
+            }
+            return { total, savings: 0, hasOffer: false, unitPrice: product.price };
+        }
+
         function renderCart() {
             const container = document.getElementById('cart-items');
             const btnProcess = document.getElementById('btn-process-sale');
@@ -1111,23 +1793,24 @@
                 let html = '';
                 
                 cart.forEach(item => {
-                    const lineTotal = item.price * item.qty;
+                    const product = products.find(p => p.id === item.id);
+                    const pricing = product ? formatPriceWithOffer(product, item.qty) : { total: item.price * item.qty, hasOffer: false, savings: 0, unitPrice: item.price };
+                    const lineTotal = pricing.total;
                     subtotal += lineTotal;
                     
                     html += `
-                        <div class="flex flex-col p-3 border-b border-slate-100 last:border-0 bg-white rounded-lg mb-1 shadow-sm">
-                            <div class="flex justify-between items-start mb-2">
-                                <span class="font-medium text-slate-800 text-sm line-clamp-2 pr-2">${item.name}</span>
-                                <span class="font-bold text-slate-800 whitespace-nowrap">${formatMoney(lineTotal)}</span>
+                        <div class="flex items-center gap-2 px-2.5 py-2 border-b border-slate-100 last:border-0 bg-white rounded-md mb-0.5 shadow-sm">
+                            <div class="flex-1 min-w-0">
+                                <div class="font-medium text-slate-800 text-xs leading-tight truncate">${item.name}</div>
+                                <div class="text-[10px] text-slate-500">${formatMoney(pricing.unitPrice)} c/u</div>
                             </div>
-                            <div class="flex justify-between items-center text-sm">
-                                <span class="text-slate-500">${formatMoney(item.price)} c/u</span>
-                                <div class="flex items-center bg-slate-100 rounded-lg">
-                                    <button onclick="updateCartQty('${item.id}', -1)" class="w-8 h-8 flex items-center justify-center text-slate-600 hover:bg-slate-200 rounded-l-lg transition-colors"><i class="fa-solid fa-minus text-xs"></i></button>
-                                    <span class="w-8 text-center font-medium text-slate-800">${item.qty}</span>
-                                    <button onclick="updateCartQty('${item.id}', 1)" class="w-8 h-8 flex items-center justify-center text-slate-600 hover:bg-slate-200 rounded-r-lg transition-colors"><i class="fa-solid fa-plus text-xs"></i></button>
-                                </div>
+                            ${pricing.hasOffer ? `<span class="text-[10px] text-green-600 font-medium shrink-0">-${formatMoney(pricing.savings)}</span>` : ''}
+                            <div class="flex items-center bg-slate-100 rounded-md shrink-0">
+                                <button onclick="updateCartQty('${item.id}', -1)" class="w-7 h-7 flex items-center justify-center text-slate-600 hover:bg-slate-200 rounded-l-md transition-colors"><i class="fa-solid fa-minus text-[10px]"></i></button>
+                                <span class="w-7 text-center font-semibold text-slate-800 text-xs">${item.qty}</span>
+                                <button onclick="updateCartQty('${item.id}', 1)" class="w-7 h-7 flex items-center justify-center text-slate-600 hover:bg-slate-200 rounded-r-md transition-colors"><i class="fa-solid fa-plus text-[10px]"></i></button>
                             </div>
+                            <span class="font-semibold text-slate-800 text-xs shrink-0 w-14 text-right">${formatMoney(lineTotal)}</span>
                         </div>
                     `;
                 });
@@ -1135,7 +1818,6 @@
                 btnProcess.disabled = false;
             }
 
-            // Calculos (Asumiendo 0% tax por simplicidad, fácil de cambiar)
             const taxRate = 0.00; 
             const tax = subtotal * taxRate;
             const total = subtotal + tax;
@@ -1143,31 +1825,111 @@
             document.getElementById('cart-subtotal').textContent = formatMoney(subtotal);
             document.getElementById('cart-tax').textContent = formatMoney(tax);
             document.getElementById('cart-total').textContent = formatMoney(total);
+            updateVESTotal();
         }
 
         // --- STREAMING_CHUNK:Processing Sales and Receipts ---
+        function getCartTotal() {
+            return cart.reduce((sum, item) => {
+                const product = products.find(p => p.id === item.id);
+                return sum + (product ? calculateOfferTotal(product, item.qty) : item.price * item.qty);
+            }, 0);
+        }
+
+        function togglePaymentMethod() {
+            const isMixto = document.getElementById('checkout-payment-method').value === 'mixto';
+            document.getElementById('pay-mixed-section').classList.toggle('hidden', !isMixto);
+            if (isMixto) {
+                document.getElementById('pay-cash').value = '0.00';
+                document.getElementById('pay-transfer').value = '0.00';
+                document.getElementById('pay-validation').classList.add('hidden');
+            }
+        }
+
+        function completePayment(field) {
+            const total = getCartTotal();
+            const cash = parseFloat(document.getElementById('pay-cash').value) || 0;
+            const transfer = parseFloat(document.getElementById('pay-transfer').value) || 0;
+            const otherValue = field === 'cash' ? transfer : cash;
+            const remainder = total - otherValue;
+            if (field === 'cash') {
+                document.getElementById('pay-cash').value = remainder > 0 ? remainder.toFixed(2) : '0.00';
+            } else {
+                document.getElementById('pay-transfer').value = remainder > 0 ? remainder.toFixed(2) : '0.00';
+            }
+            document.getElementById('pay-validation').classList.add('hidden');
+        }
+
+        function syncPayment(_source) {
+            const total = getCartTotal();
+            const cash = parseFloat(document.getElementById('pay-cash').value) || 0;
+            const transfer = parseFloat(document.getElementById('pay-transfer').value) || 0;
+            const el = document.getElementById('pay-validation');
+            const sum = cash + transfer;
+            if (Math.abs(sum - total) > 0.005) {
+                el.className = 'text-xs text-center font-medium text-red-500';
+                el.textContent = `La suma (${formatMoney(sum)}) no coincide con el total (${formatMoney(total)})`;
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
         function processSale() {
             if (cart.length === 0) return;
 
-            // Abrir el modal de selección de pago
-            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const total = getCartTotal();
+            const exchangeRate = parseFloat(document.getElementById('exchange-rate').value) || 0;
             document.getElementById('checkout-total-display').textContent = formatMoney(total);
+            document.getElementById('checkout-total-ves-display').textContent = exchangeRate > 0 ? 'Bs. ' + formatVES(total * exchangeRate) : '';
+            document.getElementById('checkout-payment-method').value = 'Efectivo';
+            document.getElementById('pay-mixed-section').classList.add('hidden');
             openModal('modal-checkout');
+        }
+
+        function getPaymentMethods() {
+            const type = document.getElementById('checkout-payment-method').value;
+            if (type === 'mixto') {
+                const cash = parseFloat(document.getElementById('pay-cash').value) || 0;
+                const transfer = parseFloat(document.getElementById('pay-transfer').value) || 0;
+                const methods = [];
+                if (cash > 0) methods.push({ method: 'Efectivo', amount: cash });
+                if (transfer > 0) methods.push({ method: 'Transferencia', amount: transfer });
+                return methods;
+            }
+            return [{ method: type, amount: getCartTotal() }];
         }
 
         function confirmSale() {
             if (cart.length === 0) return;
 
-            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const paymentMethod = document.getElementById('checkout-payment-method').value;
+            const total = getCartTotal();
+            if (document.getElementById('checkout-payment-method').value === 'mixto') {
+                const cash = parseFloat(document.getElementById('pay-cash').value) || 0;
+                const transfer = parseFloat(document.getElementById('pay-transfer').value) || 0;
+                if (Math.abs(cash + transfer - total) > 0.005) {
+                    showToast('La suma de los pagos no coincide con el total', 'error');
+                    return;
+                }
+            }
+            const paymentMethods = getPaymentMethods();
+            const paymentLabel = paymentMethods.map(p => p.method + ' ' + formatMoney(p.amount)).join(' + ');
             
+            const exchangeRate = parseFloat(document.getElementById('exchange-rate').value) || 0;
+
             // Crear registro de venta
             const newSale = {
                 id: 'VNT-' + Date.now().toString().slice(-6),
                 date: new Date().toISOString(),
-                items: JSON.parse(JSON.stringify(cart)), // Deep copy
+                items: JSON.parse(JSON.stringify(cart.map(item => {
+                    const product = products.find(p => p.id === item.id);
+                    const pricing = product ? formatPriceWithOffer(product, item.qty) : { total: item.price * item.qty, hasOffer: false };
+                    return { ...item, lineTotal: pricing.total, hasOffer: pricing.hasOffer };
+                }))),
                 total: total,
-                paymentMethod: paymentMethod // Guardar método de pago
+                paymentMethod: paymentLabel,
+                paymentMethods: paymentMethods,
+                exchangeRate: exchangeRate
             };
 
             sales.push(newSale);
@@ -1223,7 +1985,10 @@
                 <div class="mb-4 text-xs space-y-1">
                     <div class="flex justify-between"><span>Ticket:</span> <span class="font-medium">${saleData.id}</span></div>
                     <div class="flex justify-between"><span>Fecha:</span> <span>${formatDate(saleData.date)}</span></div>
-                    <div class="flex justify-between"><span>Método:</span> <span class="font-medium uppercase">${saleData.paymentMethod || 'N/A'}</span></div>
+                    ${saleData.paymentMethods && saleData.paymentMethods.length > 0
+                        ? saleData.paymentMethods.map(p => `<div class="flex justify-between"><span>${p.method}:</span> <span class="font-medium">${formatMoney(p.amount)}</span></div>`).join('')
+                        : `<div class="flex justify-between"><span>Método:</span> <span class="font-medium uppercase">${saleData.paymentMethod || 'N/A'}</span></div>`
+                    }
                 </div>
 
                 <div class="mb-4 border-t border-slate-300 border-dashed pt-2">
@@ -1232,6 +1997,7 @@
 
                 <div class="text-right border-t border-slate-300 border-dashed pt-4 mb-8">
                     <div class="text-xl font-bold">TOTAL: ${formatMoney(saleData.total)}</div>
+                    ${saleData.exchangeRate ? `<div class="text-base font-bold text-emerald-700">Bs. ${(saleData.total * saleData.exchangeRate).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div><div class="text-xs text-slate-500">Tasa: Bs. ${saleData.exchangeRate.toFixed(4)}/$</div>` : ''}
                 </div>
 
                 <div class="text-center text-xs text-slate-500 mt-8">
@@ -1313,15 +2079,25 @@
             let text = `*Bajushop.ve - Ticket de Venta*\n`;
             text += `Ticket: ${currentSaleData.id}\n`;
             text += `Fecha: ${formatDate(currentSaleData.date)}\n`;
-            text += `Método de Pago: *${currentSaleData.paymentMethod || 'N/A'}*\n\n`;
+            if (currentSaleData.paymentMethods && currentSaleData.paymentMethods.length > 0) {
+                currentSaleData.paymentMethods.forEach(p => {
+                    text += `${p.method}: *${formatMoney(p.amount)}*\n`;
+                });
+            } else {
+                text += `Método de Pago: *${currentSaleData.paymentMethod || 'N/A'}*\n`;
+            }
+            text += `\n`;
             text += `*Artículos:*\n`;
 
             currentSaleData.items.forEach(item => {
                 text += `- ${item.qty}x ${item.name} (${formatMoney(item.price)}): *${formatMoney(item.qty * item.price)}*\n`;
             });
 
-            text += `\n*TOTAL: ${formatMoney(currentSaleData.total)}*\n\n`;
-            text += `¡Gracias por su compra!`;
+            text += `\n*TOTAL: ${formatMoney(currentSaleData.total)}*\n`;
+            if (currentSaleData.exchangeRate) {
+                text += `Bs. ${formatVES(currentSaleData.total * currentSaleData.exchangeRate)} (Tasa: Bs. ${currentSaleData.exchangeRate.toFixed(4)}/$)\n`;
+            }
+            text += `\n¡Gracias por su compra!`;
 
             // Codificar el texto para la URL y abrir la ventana de WhatsApp
             const encodedText = encodeURIComponent(text);
@@ -1362,10 +2138,10 @@
             if (filteredSales.length === 0) {
                 tbody.innerHTML = '';
                 emptyState.classList.remove('hidden');
-                document.querySelector('#tab-reports table').classList.add('hidden');
+                document.querySelector('#rpt-sales-section table').classList.add('hidden');
             } else {
                 emptyState.classList.add('hidden');
-                document.querySelector('#tab-reports table').classList.remove('hidden');
+                document.querySelector('#rpt-sales-section table').classList.remove('hidden');
                 
                 let html = '';
                 filteredSales.forEach(sale => {
@@ -1393,6 +2169,69 @@
 
         // Evento para el filtro de reportes
         document.getElementById('filter-date').addEventListener('change', renderReports);
+
+        // --- REPORT TYPE TOGGLE ---
+        function setReportType(type) {
+            reportType = type;
+            document.getElementById('rpt-toggle-sales').className = 'px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ' + (type === 'sales' ? 'bg-[#B191C1] text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200');
+            document.getElementById('rpt-toggle-inv').className = 'px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ' + (type === 'inventory' ? 'bg-[#B191C1] text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200');
+            document.getElementById('rpt-sales-section').classList.toggle('hidden', type !== 'sales');
+            document.getElementById('rpt-inv-section').classList.toggle('hidden', type !== 'inventory');
+            document.getElementById('rpt-export-btn').classList.toggle('hidden', type === 'inventory');
+            if (type === 'sales') renderReports();
+            if (type === 'inventory') renderInventoryReport();
+        }
+
+        function renderInventoryReport() {
+            const cat = document.getElementById('rpt-inv-filter-cat').value;
+            const tbody = document.getElementById('rpt-inv-table-body');
+            const emptyState = document.getElementById('rpt-inv-empty-state');
+            const countSpan = document.getElementById('rpt-inv-count');
+
+            const categories = [...new Set(products.map(p => p.category).filter(c => c))];
+            const catSelect = document.getElementById('rpt-inv-filter-cat');
+            const curVal = catSelect.value;
+            catSelect.innerHTML = '<option value="">Todas las categorías</option>' + categories.map(c => `<option value="${c}">${c}</option>`).join('');
+            catSelect.value = curVal || cat || '';
+
+            const filtered = cat ? products.filter(p => p.category === cat) : [...products];
+
+            countSpan.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                document.querySelector('#rpt-inv-section table').classList.add('hidden');
+                document.getElementById('rpt-inv-footer').classList.add('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                document.querySelector('#rpt-inv-section table').classList.remove('hidden');
+
+                let html = '';
+                let totalCost = 0, totalPrice = 0;
+                filtered.forEach(p => {
+                    const cost = p.costPrice || 0;
+                    const profit = p.profitPercent || 0;
+                    totalCost += cost * p.stock;
+                    totalPrice += p.price * p.stock;
+                    html += `
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="py-3 px-4 border-b border-slate-100 font-mono text-xs text-slate-500">${p.sku}</td>
+                            <td class="py-3 px-4 border-b border-slate-100 font-medium text-slate-800">${p.name}</td>
+                            <td class="py-3 px-4 border-b border-slate-100 text-right font-medium text-slate-700">${cost > 0 ? formatMoney(cost) : '-'}</td>
+                            <td class="py-3 px-4 border-b border-slate-100 text-right font-medium text-slate-700">${profit > 0 ? profit.toFixed(1) + '%' : '-'}</td>
+                            <td class="py-3 px-4 border-b border-slate-100 text-right font-bold text-slate-800">${formatMoney(p.price)}</td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+
+                document.getElementById('rpt-inv-total-cost').textContent = formatMoney(totalCost);
+                document.getElementById('rpt-inv-total-price').textContent = formatMoney(totalPrice);
+                document.getElementById('rpt-inv-total-profit').textContent = formatMoney(totalPrice - totalCost);
+                document.getElementById('rpt-inv-footer').classList.remove('hidden');
+            }
+        }
 
         // Función auxiliar para ver un recibo antiguo
         function viewReceipt(saleStr) {
@@ -1443,11 +2282,15 @@
             }
 
             let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent += "SKU,Nombre,Categoría,Precio,Stock,Stock Mínimo\n";
+            csvContent += "SKU,Nombre,Categoría,Precio,Costo,% Utilidad,Stock,Stock Mínimo,Oferta Cant,Oferta Precio\n";
 
             products.forEach(p => {
                 const price = p.price.toFixed(2);
-                csvContent += `${p.sku},"${p.name}",${p.category || ''},${price},${p.stock},${p.minStock}\n`;
+                const cost = p.costPrice ? p.costPrice.toFixed(2) : '';
+                const profit = p.profitPercent ? p.profitPercent.toFixed(1) : '';
+                const offerQty = p.offerEnabled && p.offerQty > 1 ? p.offerQty : '';
+                const offerPrice = p.offerEnabled && p.offerPrice > 0 ? p.offerPrice.toFixed(2) : '';
+                csvContent += `${p.sku},"${p.name}",${p.category || ''},${price},${cost},${profit},${p.stock},${p.minStock},${offerQty},${offerPrice}\n`;
             });
 
             const encodedUri = encodeURI(csvContent);
@@ -1482,6 +2325,8 @@
                                 Object.assign(existing, {
                                     name: item.name,
                                     category: item.category || existing.category,
+                                    costPrice: item.costPrice !== undefined ? parseFloat(item.costPrice) : existing.costPrice,
+                                    profitPercent: item.profitPercent !== undefined ? parseFloat(item.profitPercent) : existing.profitPercent,
                                     price: parseFloat(item.price) || existing.price,
                                     stock: parseInt(item.stock) ?? existing.stock,
                                     minStock: parseInt(item.minStock) ?? existing.minStock
@@ -1492,6 +2337,8 @@
                                     sku: item.sku,
                                     name: item.name,
                                     category: item.category || '',
+                                    costPrice: parseFloat(item.costPrice) || 0,
+                                    profitPercent: parseFloat(item.profitPercent) || 0,
                                     price: parseFloat(item.price) || 0,
                                     stock: parseInt(item.stock) || 0,
                                     minStock: parseInt(item.minStock) || 5
@@ -1505,6 +2352,8 @@
                         const nameIdx = headers.indexOf('nombre');
                         const catIdx = headers.indexOf('categoría');
                         const priceIdx = headers.indexOf('precio');
+                        const costIdx = headers.indexOf('costo');
+                        const profitIdx = headers.indexOf('% utilidad') !== -1 ? headers.indexOf('% utilidad') : headers.indexOf('utilidad');
                         const stockIdx = headers.indexOf('stock');
                         const minStockIdx = headers.indexOf('stock mínimo');
 
@@ -1521,6 +2370,8 @@
                                 name,
                                 category: catIdx !== -1 ? cols[catIdx] || '' : '',
                                 price: priceIdx !== -1 ? parseFloat(cols[priceIdx]) || 0 : 0,
+                                costPrice: costIdx !== -1 ? parseFloat(cols[costIdx]) || 0 : 0,
+                                profitPercent: profitIdx !== -1 ? parseFloat(cols[profitIdx]) || 0 : 0,
                                 stock: stockIdx !== -1 ? parseInt(cols[stockIdx]) || 0 : 0,
                                 minStock: minStockIdx !== -1 ? parseInt(cols[minStockIdx]) || 5 : 5
                             };
@@ -1548,8 +2399,29 @@
             event.target.value = '';
         }
 
+        // --- SERVICE WORKER (Offline support) ---
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+
         // --- INICIALIZACIÓN ---
-        window.onload = () => {
+        window.onload = async () => {
+            // Load saved exchange rate or fetch BCV
+            const savedRate = localStorage.getItem('bajushop_exchange_rate');
+            if (savedRate) {
+                document.getElementById('exchange-rate').value = savedRate;
+                setRateEditable(false);
+            } else {
+                await fetchBCVRate();
+            }
+            // Intentar cargar datos desde GitHub
+            updateSyncStatus();
+            const loaded = await loadFromGitHub();
+            if (loaded) {
+                renderDashboard();
+                renderInventory(document.getElementById('search-inventory').value, document.getElementById('filter-category').value);
+            }
+
             const now = new Date();
             document.getElementById('dash-month').value = now.getMonth();
             document.getElementById('dash-year').value = now.getFullYear();
